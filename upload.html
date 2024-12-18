@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Anime</title>
+</head>
+<body>
+  <h1>Upload Anime Data</h1>
+  <form id="animeForm">
+    <label>Name: <input type="text" id="name" required></label><br><br>
+    <label>Genre: <input type="text" id="genre" required></label><br><br>
+    <label>Duration: <input type="text" id="duration" required></label><br><br>
+    <label>Description: <textarea id="description" required></textarea></label><br><br>
+    <button type="submit">Add Anime</button>
+  </form>
+  <p id="status"></p>
+  <script>
+    document.getElementById('animeForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const newAnime = {
+        name: document.getElementById('name').value,
+        genre: document.getElementById('genre').value,
+        duration: document.getElementById('duration').value,
+        description: document.getElementById('description').value
+      };
+
+      fetch('anime.json')
+        .then(response => response.json())
+        .then(data => {
+          data.anime.push(newAnime);
+          return fetch('anime.json', {
+            method: 'PUT', // Simulates saving the updated JSON
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data, null, 2)
+          });
+        })
+        .then(() => {
+          document.getElementById('status').innerText = 'Anime added successfully!';
+        })
+        .catch(error => console.error('Error saving data:', error));
+    });
+  </script>
+</body>
+</html>

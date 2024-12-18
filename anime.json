@@ -1,0 +1,16 @@
+{
+  "anime": [
+    {
+      "name": "Attack on Titan",
+      "genre": "Action",
+      "duration": "24 min",
+      "description": "Humanity fights titans for survival."
+    },
+    {
+      "name": "Naruto",
+      "genre": "Adventure",
+      "duration": "22 min",
+      "description": "A ninja's journey to become Hokage."
+    }
+  ]
+}
